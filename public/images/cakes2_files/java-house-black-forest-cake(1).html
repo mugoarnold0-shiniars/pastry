@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- saved from url=(0510)https://www.purpink.co.ke/web-pixels@f76b4158w3f0cce88pd0473a40m5f85a2ef/custom/web-pixel-29065279@1/sandbox/modern/products/java-house-black-forest-cake?currency=KES&variant=40827423227967&utm_source=google&utm_medium=cpc&utm_campaign=Google%20Shopping&stkn=9815103f9ea8&utm_source=google&utm_medium=cpc&utm_campaign=21721726282&gad_source=1&gad_campaignid=21721728229&gbraid=0AAAAADq4Dg3ShFpVVbLhAGAH4OuT2i0nN&gclid=Cj0KCQjwrc7GBhCfARIsAHGcW5WUbOutTwbtGRnmpE9htMMspBwUaF_DZ1B_NuKqEjwLxBX9PyqUTL8aAs4iEALw_wcB -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Black Forest Cake, 1kg</title>
+    <script src="./sf76b4158w3f0cce88pd0473a40m5f85a2efm.js"></script>
+
+    <script type="text/javascript">
+  (function(shopify) {shopify.extend('WebPixel::Render', function(api) {
+var analytics=api.analytics,browser=api.browser,init=api.init;
+analytics.subscribe("checkout_started", (event) => {
+  try {   
+   const uR = JSON.parse(localStorage.getItem("heat_last_record_before_unload_event"));
+   if(Boolean(uR)) {
+     let record = {
+       Data: uR.recording_record, StreamName: uR.streamName,
+       PartitionKey: "partition" + Math.round((Math.floor(Math.random() * 100) + 1) / 10) * 10
+     };
+     navigator.sendBeacon(`${uR.streamGateway}`, JSON.stringify(record));      
+     localStorage.removeItem('heat_last_record_before_unload_event');
+   }
+ } catch(a) {}
+});
+analytics.subscribe("checkout_completed", async (event) => {
+  const data = event.data.checkout;
+  async function glSt(key, v = '') {
+   try {
+     if(v.length) return Promise.resolve(browser.localStorage.setItem(key, v));
+     return Promise.resolve(browser.localStorage.getItem(key));
+   } catch (a) {}
+  }
+  const py = {
+   idorder: data.order.id,
+   revenue: data.totalPrice.amount,
+   products: JSON.stringify(data.lineItems),
+   currency: data.currencyCode,
+   _idv: await glSt('_heatVid'),
+   _id: await glSt('_mr_vid'),
+   idsite: 2683,
+   device_type: await glSt('_heatDeviceType'),
+   path: 'https://dashboard.heatmap.com/',
+   wpx: JSON.stringify(event.context.document)
+  };
+  await glSt('heatIsGoalBuyer', '1');
+  await glSt('heatWPx', JSON.stringify(py));
+  fetch(`${py.path}heatmap.php?type=pixel&idorder=${py.idorder}&revenue=${py.revenue}&currency=${py.currency}&_idv=${py._idv}`, {method: 'POST', body: JSON.stringify(py)});
+  var s = document.createElement("script"); s.type="text/javascript"; s.src=`${py.path}conversions.js?siteId=2683`; s.defer=true; document.head.appendChild(s);
+});
+});})(self.webPixelsManager.createShopifyExtend('29065279', 'custom'));
+
+</script>
+
+  </head>
+  <body>
+
+</body></html>

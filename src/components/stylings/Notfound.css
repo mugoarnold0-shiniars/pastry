@@ -1,0 +1,61 @@
+/* Centering the container */
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1d2b64, #f8cdda);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+  }
+  
+  /* Big animated 404 text */
+  .animated-404 {
+    font-size: 10rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6),
+                 0 0 40px rgba(255, 255, 255, 0.4),
+                 0 0 60px rgba(255, 255, 255, 0.2);
+    animation: pulse 2s infinite;
+    margin-bottom: 10px;
+  }
+  
+  /* Animation effect */
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  /* Subtitle styling */
+  .not-found-container h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Paragraph text */
+  .not-found-container p {
+    max-width: 500px;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  /* Button styling */
+  .not-found-container .btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .not-found-container .btn:hover {
+    background-color: #fff;
+    color: #1d2b64;
+    transform: scale(1.05);
+  }
+  

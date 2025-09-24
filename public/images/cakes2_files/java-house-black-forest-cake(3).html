@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!-- saved from url=(0510)https://www.purpink.co.ke/web-pixels@f76b4158w3f0cce88pd0473a40m5f85a2ef/custom/web-pixel-43614271@1/sandbox/modern/products/java-house-black-forest-cake?currency=KES&variant=40827423227967&utm_source=google&utm_medium=cpc&utm_campaign=Google%20Shopping&stkn=9815103f9ea8&utm_source=google&utm_medium=cpc&utm_campaign=21721726282&gad_source=1&gad_campaignid=21721728229&gbraid=0AAAAADq4Dg3ShFpVVbLhAGAH4OuT2i0nN&gclid=Cj0KCQjwrc7GBhCfARIsAHGcW5WUbOutTwbtGRnmpE9htMMspBwUaF_DZ1B_NuKqEjwLxBX9PyqUTL8aAs4iEALw_wcB -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Black Forest Cake, 1kg</title>
+    <script src="./sf76b4158w3f0cce88pd0473a40m5f85a2efm.js"></script>
+
+    <script type="text/javascript">
+  (function(shopify) {shopify.extend('WebPixel::Render', function(api) {
+var analytics=api.analytics,browser=api.browser,init=api.init;
+// Google Ads Remarketing Tracking Created by FeedArmy V1.02
+// Copyright FeedArmy Co., Ltd.
+
+// SETTINGS START
+
+const GOOGLE_ADS_ID = 'AW-985140749';
+const REMARKETING_COUNTRY_CODE = 'KE';
+
+// for the ID_TYPE, if your products look like shopify_US_123456789_123456798 add the word shopify
+// if your products are sku's add the value sku -- const ID_TYPE = 'sku';
+// if your proudcts use the variant id use the value variant_id -- const ID_TYPE = 'variant_id';
+// if your proudcts use the parent id use the value parent_id -- const ID_TYPE = 'parent_id';
+
+const ID_TYPE = 'shopify';
+
+// If you want to capitalize the SKU set CAPITALIZE_SKU to true, if you don't want to change anything set to false
+const CAPITALIZE_SKU = false;
+
+// SETTINGS END
+
+const script = document.createElement('script');
+script.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=' + GOOGLE_ADS_ID);
+script.setAttribute('async', '');
+document.head.appendChild(script);
+
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag('js', new Date());
+gtag('config', GOOGLE_ADS_ID);
+
+const createLineItemsData = (lineItems, ID_TYPE, REMARKETING_COUNTRY_CODE, CAPITALIZE_SKU) => {
+  return lineItems.map((item) => {
+    let itemId;
+    if (ID_TYPE === "shopify") {
+      itemId = "shopify_" + REMARKETING_COUNTRY_CODE + "_" + item.variant?.product?.id + "_" + item.variant?.id;
+    } else if (ID_TYPE === "parent_id") {
+      itemId = item.variant?.product?.id;
+    } else if (ID_TYPE === "sku") {
+      itemId = item.variant?.sku;
+      if (CAPITALIZE_SKU) {
+        itemId = itemId.toUpperCase();
+      }
+    } else {
+      itemId = item.variant?.id;
+    }
+
+    return {
+      id: itemId
+    };
+  });
+};
+
+// testing thedata: JSON.stringify(event.data, null, 2),
+
+analytics.subscribe("checkout_completed", (event) => {
+  const lineItemsData = createLineItemsData(event.data?.checkout?.lineItems, ID_TYPE, REMARKETING_COUNTRY_CODE, CAPITALIZE_SKU);
+  gtag('event', 'purchase', {
+    send_to: GOOGLE_ADS_ID,
+    value: event.data?.checkout?.totalPrice?.amount,
+    currency: event.data?.checkout?.currencyCode,
+    google_business_vertical: 'retail',
+    items: lineItemsData
+  });
+});
+
+analytics.subscribe("product_added_to_cart", (event) => {
+  let itemId;
+  if (ID_TYPE === "shopify") {
+    itemId = "shopify_" + REMARKETING_COUNTRY_CODE + "_" + event.data?.cartLine?.merchandise?.product?.id + "_" + event.data?.cartLine?.merchandise?.id;
+  } else if (ID_TYPE === "parent_id") {
+    itemId = event.data?.cartLine?.merchandise?.product?.id;
+  } else if (ID_TYPE === "sku") {
+    itemId = event.data?.cartLine?.merchandise?.sku;
+    if (CAPITALIZE_SKU) {
+      itemId = itemId.toUpperCase();
+    }
+  } else {
+    itemId = event.data?.cartLine?.merchandise?.id;
+  }
+  gtag('event', 'add_to_cart', {
+    send_to: GOOGLE_ADS_ID,
+    items: [{ id: itemId, google_business_vertical: 'retail' }],
+    value: event.data?.cartLine?.merchandise?.price?.amount,
+  });
+});
+
+analytics.subscribe("product_viewed", (event) => {
+  let itemId;
+  if (ID_TYPE === "shopify") {
+    itemId = "shopify_" + REMARKETING_COUNTRY_CODE + "_" + event.data?.productVariant?.product?.id + "_" + event.data?.productVariant?.id;
+  } else if (ID_TYPE === "parent_id") {
+    itemId = event.data?.productVariant?.product?.id;
+  } else if (ID_TYPE === "sku") {
+    itemId = event.data?.productVariant?.sku;
+    if (CAPITALIZE_SKU) {
+      itemId = itemId.toUpperCase();
+    }
+  } else {
+    itemId = event.data?.productVariant?.id;
+  }
+  gtag('event', 'view_item', {
+    send_to: GOOGLE_ADS_ID,
+    items: [{ id: itemId, google_business_vertical: 'retail' }],
+    value: event.data?.productVariant?.price?.amount,
+  });
+});
+
+analytics.subscribe("search_submitted", (event) => {
+  gtag('event', 'view_search_results', {
+    send_to: GOOGLE_ADS_ID,
+    query: event.data?.searchResult?.query,
+  });
+});
+
+analytics.subscribe("collection_viewed", (event) => {
+  gtag('event', 'view_item_list', {
+    send_to: GOOGLE_ADS_ID,
+    collection_id: event.data?.collection?.id,
+    collection_title: event.data?.collection?.title,
+  });
+});
+});})(self.webPixelsManager.createShopifyExtend('43614271', 'custom'));
+
+</script>
+
+  <script src="./js" async=""></script><script type="text/javascript" async="" src="./f(3).txt"></script><script type="text/javascript" async="" src="./f(4).txt"></script></head>
+  <body>
+
+</body></html>
