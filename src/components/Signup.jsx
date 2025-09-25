@@ -1,26 +1,68 @@
 import React, { useState } from "react";
 import { MdAlternateEmail } from "react-icons/md";
 import { CiUser, CiLock } from "react-icons/ci";
+import axios from "axios";
+import Loader from "./Loader";
 
 const Signup = ({ FormHandle }) => {
   const [User, setUser] = useState("");
   const [Email, setEmail] = useState("");
+  const[phone,setPhone]= useState("")
   const [Password, setPassword] = useState("");
 
-  function handleSignup(e) {
+   // state for UI
+   const[loading,setLoading] =useState(false)
+   const[success,setSuccess] =useState("")
+   const[error,setError] =useState("")
+
+  const handleSignup = async (e) =>{
     e.preventDefault();
-
-    if (!User || !Password || !Email) return;
-
-    console.log(User, Email, Password);
-    setUser("");
-    setEmail("");
-    setPassword("");
+    setLoading(true); // show loader immediately
+  
+    try {
+      const data = new FormData();
+      data.append("username", User);
+      data.append("email", Email);
+      data.append("phone", phone);
+      data.append("password", Password);
+  
+      const response = await axios.post(
+        "https://arnold254.pythonanywhere.com/api/signup",
+        data
+      );
+  
+      // Force loader to stay for 3 seconds before hiding
+      setTimeout(() => {
+        setLoading(false);
+        setSuccess("User registered successfully ✅");
+        setError("");
+  
+        // Clear input fields
+        setUser("");
+        setEmail("");
+        setPhone("");
+        setPassword("");
+      }, 3000);
+    } catch (err) {
+      setTimeout(() => {
+        setLoading(false);
+        setError("❌ Sorry, Registration failed. Please try again...");
+        setSuccess("");
+      }, 3000);
+    }
   }
 
   return (
     <div className="form-container">
       <h2>Signup</h2>
+
+       {/* Loader */}
+       {loading && <Loader />}
+
+{/* Messages */}
+{success && <p className="text-success">{success}</p>}
+{error && <p className="text-danger">{error}</p>}
+
       <form onSubmit={handleSignup}>
         <div className="form-control">
           <input
@@ -39,6 +81,15 @@ const Signup = ({ FormHandle }) => {
             value={Email}
           />
           <MdAlternateEmail className="icon email" />
+        </div>
+        <div className="form-control">
+          <input
+            type="number"
+            placeholder="Enter your phone number"
+            onChange={(e) => setPhone(e.target.value)}
+            value={phone}
+          />
+          <CiUser className="icon user" />
         </div>
         <div className="form-control">
           <input

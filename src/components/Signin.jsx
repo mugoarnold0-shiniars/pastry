@@ -1,130 +1,116 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import Loader from './Loader'
-import "./stylings/Button.css"; // import the new button styles
+import React, { useState } from "react";
+import Loader from "./Loader";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const Signin = () => {
-  // hooks  to capture different state 
-  const[username,setUsername]=useState("");
-  const [email,setEmail]=useState("")
-  const[phone,setPhone]= useState("")
-  const[password,setPassword] = useState("")
-  
-  // state for UI
-  const[loading,setLoading] =useState(false)
-  const[success,setSuccess] =useState("")
-  const[error,setError] =useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate=useNavigate()
 
-  // Create a function that handles the submit action
-  const submit = async (e) => {
+
+     // state for UI
+     const[loading,setLoading] =useState(false)
+     const[success,setSuccess] =useState("")
+     const[error,setError] =useState("")
+  
+
+  const handleSubmit = async (e) => {
+    // prevent the site from reloading
     e.preventDefault();
-    setLoading(true); // show loader immediately
-  
-    try {
-      const data = new FormData();
-      data.append("username", username);
-      data.append("email", email);
-      data.append("phone", phone);
-      data.append("password", password);
-  
-      const response = await axios.post(
-        "https://arnold254.pythonanywhere.com/api/signup",
-        data
-      );
-  
-      // Force loader to stay for 3 seconds before hiding
-      setTimeout(() => {
-        setLoading(false);
-        setSuccess("User registered successfully ✅");
-        setError("");
-  
-        // Clear input fields
-        setUsername("");
-        setEmail("");
-        setPhone("");
-        setPassword("");
-      }, 3000);
-    } catch (err) {
-      setTimeout(() => {
-        setLoading(false);
-        setError("❌ Sorry, Registration failed. Please try again...");
-        setSuccess("");
-      }, 3000);
+    // update the loading hook with new message
+    setLoading(true)
+    try{
+      const data = new FormData()
+      data.append("email",email)
+      data.append("password",password)
+      // await for a response from the api
+      const response = await axios.post("https://arnold254.pythonanywhere.com/api/signin",data)
+      // set the loading to false so that it stops loading
+      setLoading(false)
+      
+      console.log(response.data)
+      if (response.data.message =="Login succesful"){
+      localStorage.setItem("user",JSON.stringify(response.data.user))
+        navigate("/")
+          }
+    else{
+      setError(response.data.message)
+    }
+  }
+    catch(error){
+      // set the loading to false so that it stops loading
+      setLoading(false)
+      setError("An error occured....")
+
     }
   };
   
-  
   return (
-    <div class="wrapper">
-    <div class="title-text">
-      <div class="title login">Login Form</div>
-      <div class="title signup">Signup Form</div>
-    </div>
-    <div class="form-container">
-      <div class="slide-controls">
-        <input type="radio" name="slide" id="login" checked></input>
-        <input type="radio" name="slide" id="signup"></input>
-        <label for="login" class="slide login">Login</label>
-        <label for="signup" class="slide signup">Signup</label>
-        <div class="slider-tab"></div>
+    
+    <div className="row justify-content-center text-center">
+    <div className="col-md-6 card shadow p-4 text-center">
+    <main className="container mx-auto p-4 mt-12 bg-white flex flex-col items-center justify-center text-gray-700">
+      <div className="w-10/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-4/12 mb-4">
+        <h1 className="text-4xl font-semibold">Welcome back.</h1>
+        {/* Loader */}
+       {loading && <Loader />}
+
+{/* Messages */}
+{success && <p className="text-success">{success}</p>}
+{error && <p className="text-danger">{error}</p>}
+
       </div>
-      <div class="form-inner">
-        <form action="#" class="login">
-          <pre>
-          </pre>
-          <div class="field">
-            <input type="text" placeholder="Email Address" required></input>
+
+      <form
+        onSubmit={handleSubmit}
+        className="w-10/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-4/12 mb-6"
+      >
+        <input
+          className="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          className="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <div className="flex items-center">
+          <div className="w-1/2 flex items-center">
+            <input
+              id="remember-me"
+              type="checkbox"
+              className="mt-1 mr-2"
+            />
+            <label htmlFor="remember-me">Remember me!</label>
           </div>
-          <div class="field">
-            <input type="password" placeholder="Password" required></input>
-          </div>
-          <div class="pass-link"><a href="#">Forgot password?</a></div>
-          <div class="field btn">
-            <div class="btn-layer"></div>
-            <input type="submit" value="Login">
-            </input>
-          </div>
-          <div class="signup-link">Create an account <a href="">Signup now</a></div>
-        </form>
-        <form action="#" class="signup">
-          <div class="field">
-            <input 
-            onSubmit={submit}
-            type="text" placeholder="Name" required>
-            </input>
-          </div>
-          <div class="field">
-            <input 
-            onSubmit={submit}
-            type="text" 
-            placeholder="Email Address" 
-            required>
-            </input>
-          </div>
-          <div class="field">
-            <input 
-            onSubmit={submit}
-            type="password" 
-            placeholder="Password" 
-            required></input>
-          </div>
-          <div class="field">
-            <input 
-            onSubmit={submit}
-             type="password" 
-             placeholder="Confirm password" 
-             required></input>
-          </div>
-          <div class="field btn">
-            <div class="btn-layer"></div>
-            <input type="submit" value="Signup"></input>
-          </div>
-          <div class="signup-link">Create an account? <a href="">Signup</a></div>
-        </form>
-      </div>
+          <button
+            className="ml-auto w-1/2 bg-gray-800 text-white p-2 rounded font-semibold hover:bg-gray-900"
+            type="submit"
+          >
+            Log In
+          </button>
+        </div>
+      </form>
+
+      {message && <p className="text-red-500 font-medium">{message}</p>}
+    </main>
+    
     </div>
-  </div>
-  )
-}
+    </div>
+    
+    
+  );
+};
 
 export default Signin;

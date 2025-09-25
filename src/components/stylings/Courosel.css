@@ -117,3 +117,10 @@
     width: 150px;
 
   }
+  .btn {
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 6px 18px;
+  }
+  
+  

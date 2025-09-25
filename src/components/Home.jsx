@@ -1,87 +1,123 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Courosel from "./Courosel";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  // Products data (you can expand this later)
-  const products = [
-    {
-      id: 1,
-      name: "Cookies",
-      img: "images/Cookies1.jpg",
-      desc: "Our pastry will make you feel right back at home enjoying a nice cup of coffee",
-    },
-    {
-      id: 2,
-      name: "Other Pastry",
-      img: "images/otherpastry.jpeg",
-      desc: "Our motto is: To provide Quality service to our customers and to provide customers with the best and high Quality Pastry",
-    },
-    {
-      id: 3,
-      name: "Pies",
-      img: "images/pies1.jpg",
-      desc: "We have wide varieties of pastry waiting for you to try as much as you can",
-    },
-    {
-      id: 4,
-      name: "Cakes",
-      img: "images/cakes3.jpg",
-      desc: "Our amazing delicacies are just waiting for you 😊",
-    },
-  ];
+  const img_url = "https://Arnold254.pythonanywhere.com/static/images/";
 
-  // Filter based on search input
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Fetch products from API
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        "https://Arnold254.pythonanywhere.com/api/getproduct"
+      );
+      setProduct(response.data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      setError("There was an error fetching products. Please try again later.");
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  // Filter products based on search term
+  const filteredProducts = product.filter(
+    (item) =>
+      item.product_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.product_description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <>
       <Courosel />
+
       <div className="m-3">
-        <h3 className="text-info">Available products</h3>
+        <h3 className="text-info text-center">Available Products</h3>
 
-        <div className="search-bar mb-4">
-{/* 🔍 Search Bar with Icon Inside */}
-<div className="search-bar mb-4 position-relative">
-  <i className="bi bi-search search-icon"></i>
-  <input
-    type="text"
-    className="form-control ps-5"  // ps-5 adds left padding so text doesn't overlap the icon
-    placeholder="Search for pastry..."
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-  />
-</div>
-
-</div>
-
-        {/* Products Grid */}
-        <div className="row">
-          {filteredProducts.length > 0 ? (
-            filteredProducts.map((product) => (
-              <div key={product.id} className="col-md-3 mb-4">
-                <div className="card shadow h-100">
-                  <div className="card-body text-center">
-                    <img
-                      src={product.img}
-                      alt={product.name}
-                      className="img-fluid rounded"
-                      style={{ maxHeight: "200px", objectFit: "cover" }}
-                    />
-                  </div>
-                  <div className="card-footer">
-                    <b>{product.desc}</b>
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p className="text-muted">No products found.</p>
-          )}
+        {/* Search bar */}
+        <div className="search-bar mb-4 position-relative">
+          <i className="bi bi-search search-icon position-absolute top-50 translate-middle-y ms-3"></i>
+          <input
+            type="text"
+            className="form-control ps-5"
+            placeholder="Search for pastry..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
+      </div>
+
+      {/* Loading/Error Handling */}
+      {loading && <p className="text-center text-primary">Loading products...</p>}
+      {error && <p className="text-center text-danger">{error}</p>}
+
+      <div className="row">
+        {filteredProducts.map((product, index) => (
+          <div className="col-md-3 mb-3 text-center" key={index}>
+            <div className="card shadow h-100 position-relative">
+              {/* Product Image */}
+              <img
+                src={img_url + product.product_photo}
+                alt="product"
+                className="card-img product_img mt-3"
+              />
+
+              {/* Side buttons (Wishlist & Compare) */}
+              <div className="side-buttons position-absolute top-0 end-0 m-2 d-flex flex-column">
+                <button className="btn btn-light mb-2 shadow-sm rounded-circle">
+                  <i className="bi bi-heart"></i>
+                </button>
+                <button className="btn btn-light shadow-sm rounded-circle">
+                  <i className="bi bi-arrow-repeat"></i>
+                </button>
+              </div>
+
+              {/* Card Body */}
+              <div className="card-body">
+                <h5 className="fw-bold">{product.product_name}</h5>
+                <p className="text-dark">
+                  {product.product_description.slice(0, 60)}...
+                </p>
+
+                {/* Ratings */}
+                <div className="mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <i
+                      key={i}
+                      className={`bi bi-star-fill ${
+                        i < (product.rating || Math.floor(Math.random() * 5) + 1)
+                          ? "text-warning"
+                          : "text-secondary"
+                      }`}
+                    ></i>
+                  ))}
+                </div>
+
+                <b className="text-danger">Ksh {product.product_cost}</b> <br />
+
+                <button
+                  className="btn btn-success mt-2"
+                  onClick={() =>
+                    navigate("/mpesapayment", { state: { product } })
+                  }
+                >
+                  Buy now
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

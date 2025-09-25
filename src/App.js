@@ -11,6 +11,9 @@ import Notfound from './components/Notfound';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Mpesapayment from './components/Mpespayment';
 import Aboutus from './components/Aboutus';
+import Addproduct from './components/Addproduct';
+import Footer from './components/Footer';
+import Poy from './components/Poy';
 
 
 function App() {
@@ -31,9 +34,12 @@ function App() {
           <Route path="/signin" element={<Signin />} />
       <Route path='/mpesapayment' element={<Mpesapayment/>} />
           <Route path="/aboutus"element={<Aboutus/>} />
+          <Route path='/addproduct' element={<Addproduct/>} />
+          
           <Route path="*"element={<Notfound/>}/>
           
         </Routes>
+        <Footer/>
       
       </div>
     </Router>
