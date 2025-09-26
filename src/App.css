@@ -589,3 +589,10 @@ i {
 .gradient-button-shadow {
   box-shadow: 0 4px 15px rgba(127, 0, 255, 0.4);
 }
+
+.mine{
+  margin-top: 50px;
+}
+.minee{
+  margin-bottom: 200px;
+}

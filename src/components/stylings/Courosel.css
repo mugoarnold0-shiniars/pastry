@@ -1,126 +1,184 @@
+/* ===== Hero Section Layout ===== */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;       /* stack on smaller screens */
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2e3033;
+  padding: 3rem 2rem;
+  gap: 2rem;
+}
+
+.hero-text {
+  flex: 1 1 300px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero-text h1 {
+  margin: 0;
+}
+
+.hero-text p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.rainbow-text {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== Carousel Body ===== */
 .carousel-body {
-    background-color: #100e17;
-    font-family: 'Open Sans', sans-serif;
+  flex: 1 1 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* ===== Cards ===== */
+.carousel-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 280px;
+  width: 200px;
+  background-color: #17141d;
+  border-radius: 10px;
+  box-shadow: -1rem 0 3rem #000;
+  transition: 0.4s ease-out;
+  margin: 0.5rem;
+  position: relative;
+}
+
+.carousel-card:hover {
+  transform: translateY(-10px);
+}
+
+/* ===== Title Inside Card ===== */
+.carousel-title {
+  color: white;
+  font-weight: 300;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+/* ===== Progress Bar ===== */
+.carousel-bar {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  height: 5px;
+  width: 150px;
+}
+
+.carousel-emptybar {
+  background-color: #2e3033;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-filledbar {
+  position: absolute;
+  top: 0px;
+  z-index: 3;
+  width: 0px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 154, 217, 1) 0%,
+    rgba(217, 147, 0, 1) 65%,
+    rgba(255, 186, 0, 1) 100%
+  );
+  transition: 0.6s ease-out;
+}
+
+.carousel-card:hover .carousel-filledbar {
+  width: 120px;
+  transition: 0.4s ease-out;
+}
+
+/* ===== Image Circle ===== */
+.carousel-circle {
+  position: absolute;
+  top: 150px;
+  left: calc(50% - 60px);
+}
+
+.car-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ===== Responsive Media Queries ===== */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
   }
-  
-  .carousel-container {
-    position: absolute;
-    height: 300px;
-    width: 600px;
-    top: 60px;
-    left: calc(50% - 300px);
-    display: flex;
+
+  .hero-text {
+    flex: 1 1 100%;
   }
-  
+
+  .carousel-body {
+    flex: 1 1 100%;
+  }
+
   .carousel-card {
-    display: flex;
-    height: 280px;
-    width: 200px;
-    background-color: #17141d;
-    border-radius: 10px;
-    box-shadow: -1rem 0 3rem #000;
-    transition: 0.4s ease-out;
-    position: relative;
-    left: 0px;
+    width: 180px;
+    height: 260px;
   }
-  
-  .carousel-card:not(:first-child) {
-    margin-left: -50px;
+}
+
+/* Small Phones */
+@media (max-width: 576px) {
+  .carousel-container {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .carousel-card:hover {
-    transform: translateY(-20px);
-    transition: 0.4s ease-out;
+
+  .carousel-card {
+    width: 90%;
+    max-width: 300px;
+    height: 240px;
   }
-  
-  .carousel-card:hover ~ .carousel-card {
-    position: relative;
-    left: 50px;
-    transition: 0.4s ease-out;
-  }
-  
-  .carousel-title {
-    color: white;
-    font-weight: 300;
-    position: absolute;
-    left: 20px;
-    top: 15px;
-  }
-  
-  .carousel-bar {
-    position: absolute;
-    top: 100px;
-    left: 20px;
-    height: 5px;
-    width: 150px;
-  }
-  
-  .carousel-emptybar {
-    background-color: #2e3033;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .carousel-filledbar {
-    position: absolute;
-    top: 0px;
-    z-index: 3;
-    width: 0px;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 154, 217, 1) 0%,
-      rgba(217, 147, 0, 1) 65%,
-      rgba(255, 186, 0, 1) 100%
-    );
-    transition: 0.6s ease-out;
-  }
-  
-  .carousel-card:hover .carousel-filledbar {
-    width: 120px;
-    transition: 0.4s ease-out;
-  }
-  
+
   .carousel-circle {
-    position: absolute;
-    top: 150px;
-    left: calc(50% - 60px);
+    top: 130px;
+    left: calc(50% - 45px);
   }
-  
-  .carousel-stroke {
-    stroke: white;
-    stroke-dasharray: 360;
-    stroke-dashoffset: 360;
-    transition: 0.6s ease-out;
-  }
-  
-  svg {
-    fill: #17141d;
-    stroke-width: 2px;
-  }
-  
-  .carousel-card:hover .carousel-stroke {
-    stroke-dashoffset: 100;
-    transition: 0.6s ease-out;
-  }
-  .background{
-    background-color: #2e3033;
-    padding: 200px;
 
+  .car-img {
+    width: 90px;
+    height: 90px;
+  }
 
+  .carousel-title {
+    font-size: 1rem;
   }
-  .icon{
-    position: absolute;
-    top: 100px;
-    left: 20px;
-    height: 60px;
-    width: 150px;
-
-  }
-  .btn {
-    font-weight: bold;
-    border-radius: 20px;
-    padding: 6px 18px;
-  }
-  
-  
+}
