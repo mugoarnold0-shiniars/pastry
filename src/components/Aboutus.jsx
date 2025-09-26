@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Aboutus = () => {
   return (
@@ -12,7 +13,7 @@ const Aboutus = () => {
             <div className="col-md-12">
               <h1 className="lg-text">About Us</h1>
               <p className="image-aboutus-para">
-                <span className="text-dark">Soko </span> <span className="text-danger">Garden</span>is a app where one can do his/her's groceries right in the comfort of his home
+                <span className="text-dark">Lexy </span> <span className="text-danger">Pasrty</span>is a website where one can do his/her's pastries right in the comfort of his home
               </p>
             </div>
           </div>
@@ -75,7 +76,7 @@ const Aboutus = () => {
           <div className="col-md-4 card shadow team-box">
             <div className="team-img thumbnail">
               <div className="team-content">
-                <h3>Philip Freeman</h3>
+                <h3>Arnold Ndegwa</h3>
                 <div className="border-team"></div>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
@@ -103,7 +104,7 @@ const Aboutus = () => {
           <div className="col-md-4 card shadow team-box">
             <div className="team-img thumbnail">
               <div className="team-content">
-                <h3>David Smith</h3>
+                <h3>Agnes Wanjiku</h3>
                 <div className="border-team"></div>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
@@ -131,7 +132,7 @@ const Aboutus = () => {
           <div className="col-md-4  card shadow team-box">
             <div className="team-img thumbnail">
               <div className="team-content">
-                <h3>Robert D'costa</h3>
+                <h3>Wairimu Mugo</h3>
                 <div className="border-team"></div>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
@@ -169,7 +170,7 @@ const Aboutus = () => {
             </div>
             <div className="col-md-3 col-sm-3 col-xs-12 Tpadding10">
               <button type="button" className="btn btn-primary site-btn">
-                Start Right Now
+                <Link to="/" className="text-white" >Start Right Now</Link>
               </button>
             </div>
           </div>

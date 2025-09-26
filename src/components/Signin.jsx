@@ -69,21 +69,23 @@ const Signin = () => {
         className="w-10/12 sm:w-8/12 md:w-6/12 lg:w-5/12 xl:w-4/12 mb-6"
       >
         <input
-          className="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
+         className="form-control"
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <br />
         <input
-          className="mb-4 p-2 appearance-none block w-full bg-gray-200 placeholder-gray-900 rounded border focus:border-teal-500"
+          className="form-control"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <br />
 
         <div className="flex items-center">
           <div className="w-1/2 flex items-center">
@@ -105,9 +107,11 @@ const Signin = () => {
 
       {message && <p className="text-red-500 font-medium">{message}</p>}
     </main>
-    
+    <hr />
+    <br />
     </div>
     </div>
+  
     
     
   );

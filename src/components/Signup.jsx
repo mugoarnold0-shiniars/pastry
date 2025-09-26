@@ -3,6 +3,8 @@ import { MdAlternateEmail } from "react-icons/md";
 import { CiUser, CiLock } from "react-icons/ci";
 import axios from "axios";
 import Loader from "./Loader";
+import { Link } from "react-router-dom";
+
 
 const Signup = ({ FormHandle }) => {
   const [User, setUser] = useState("");
@@ -103,8 +105,8 @@ const Signup = ({ FormHandle }) => {
         </div>
         <button type="submit">Sign Up</button>
       </form>
-      <p onClick={() => FormHandle("login")}>
-        Already have an account? Please Sign In
+      <p onClick={() => ("login")}>
+        Already have an account? Please <br /> <Link to="/signin">Sign In</Link>
       </p>
     </div>
   );

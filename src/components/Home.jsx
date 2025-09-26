@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Courosel from "./Courosel";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Favorites from "./Favorites";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -57,6 +59,21 @@ const Home = () => {
           />
         </div>
       </div>
+    <br />
+      <div className="image-aboutus-banner">
+        <div className="">
+          <div className="row">
+            <div className="col-md-12 ">
+              <h1 className="lg-text">Pastry home</h1>
+              <p className="image-aboutus-para">
+                <span className="text-dark">Lexy </span> <span className="text-danger">Pasrty</span>is a website where one can do his/her's pastries right in the comfort of his home
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+     <Favorites/>
+<br />
 
       {/* Loading/Error Handling */}
       {loading && <p className="text-center text-primary">Loading products...</p>}
@@ -75,7 +92,7 @@ const Home = () => {
 
               {/* Side buttons (Wishlist & Compare) */}
               <div className="side-buttons position-absolute top-0 end-0 m-2 d-flex flex-column">
-                <button className="btn btn-light mb-2 shadow-sm rounded-circle">
+                <button className="btn btn-light mb-4 shadow-sm rounded-circle"><Link to="/favorires"></Link>
                   <i className="bi bi-heart"></i>
                 </button>
                 <button className="btn btn-light shadow-sm rounded-circle">

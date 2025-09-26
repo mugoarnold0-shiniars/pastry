@@ -137,10 +137,10 @@ const Footer = () => {
                   Nairobi, NA 10012, KE
                 </p>
                 <p>
-                  <i className="fas fa-phone me-3"></i> + 254 734 567 88
+                  <i className="fas fa-phone me-3"></i> + 254 759 8195 60
                 </p>
                 <p>
-                  <i className="fas fa-print me-3"></i> + 254 734 567 89
+                  <i className="fas fa-print me-3"></i> + 254 759 8195 60
                 </p>
               </div>
             </div>

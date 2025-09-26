@@ -25,7 +25,8 @@ const Courosel = () => {
           <span>fine made delicacies</span>
           <br />
           <br />
-          <h1 className="rainbow-text">Lexxy pastry</h1>
+          <br />
+          <h1 className="rainbow-text background-home">Lexxy pastry</h1>
         </div>
           {/* Carousel */}
           <div className="carousel-body">

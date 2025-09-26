@@ -14,6 +14,7 @@ import Aboutus from './components/Aboutus';
 import Addproduct from './components/Addproduct';
 import Footer from './components/Footer';
 import Poy from './components/Poy';
+import Favorites from './components/Favorites';
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
       <Route path='/mpesapayment' element={<Mpesapayment/>} />
           <Route path="/aboutus"element={<Aboutus/>} />
           <Route path='/addproduct' element={<Addproduct/>} />
-          
+          <Route path='/favorites' element={<Favorites/>} />
           <Route path="*"element={<Notfound/>}/>
           
         </Routes>
