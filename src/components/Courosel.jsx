@@ -79,27 +79,8 @@ const Courosel = () => {
                 </div>
               </div>
 
-              <div className="carousel-card">
-                <h3 className="carousel-title">Our motto</h3>
-                <div className="carousel-bar">
-                  <div className="carousel-emptybar"></div>
-                  <div className="carousel-filledbar"></div>
-                </div>
-                <div className="carousel-circle">
-                  <img src="images/emoji1.jpeg" alt="" className="car-img" />
-                </div>
-              </div>
-
-              <div className="carousel-card">
-                <h3 className="carousel-title">Cakes</h3>
-                <div className="carousel-bar">
-                  <div className="carousel-emptybar"></div>
-                  <div className="carousel-filledbar"></div>
-                </div>
-                <div className="carousel-circle">
-                  <img src="images/cakes.jpeg" alt="" className="car-img" />
-                </div>
-              </div>
+             
+              
             </div>
           </div>
           {/* End Carousel */}
