@@ -5,7 +5,7 @@ const Courosel = () => {
   return (
     <section className="hero-section">
       {/* Left Text Section */}
-      <div className="hero-text">
+      <div className="hero-text ">
         <h1>Our</h1>
         <h1>Bakery</h1>
         <h1>start</h1>

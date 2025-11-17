@@ -15,6 +15,7 @@ import Addproduct from './components/Addproduct';
 import Footer from './components/Footer';
 import Poy from './components/Poy';
 import Favorites from './components/Favorites';
+import Chatbot from './components/Chatrobot';
 
 
 function App() {
@@ -33,7 +34,8 @@ function App() {
           
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
-      <Route path='/mpesapayment' element={<Mpesapayment/>} />
+          <Route path="/chat" element={<Chatbot />} />
+          <Route path='/mpesapayment' element={<Mpesapayment/>} />
           <Route path="/aboutus"element={<Aboutus/>} />
           <Route path='/addproduct' element={<Addproduct/>} />
           <Route path='/favorites' element={<Favorites/>} />

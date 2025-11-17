@@ -41,15 +41,15 @@ const Aboutus = () => {
                   </p>
                 </div>
                 <div className="col-md-6 ">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nulla convallis egestas rhoncus. Donec facilisis fermentum
-                    sem, ac viverra ante luctus vel. Donec vel mauris quam.
+                  <p className="text-dark">
+                    Here at lexxy pastry we give more than our delicasises to enjoy you will get to experience Quality Service and amazing pastries by diferent chefs around the world.We Hope that through this platform we are able to reach alot of people and as they say the more the Merrier.
+
                   </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nulla convallis egestas rhoncus. Donec facilisis fermentum
-                    sem, ac viverra ante luctus vel. Donec vel mauris quam.
+                  <p className="text-dark">
+                  We Hope that through this platform we are able to reach alot of people.
+                  As they say the more the Merrier.
+                  So don't wait come Right Now with your friend!!!
+
                   </p>
                 </div>
               </div>
@@ -63,10 +63,9 @@ const Aboutus = () => {
         <div className="row">
           <div className="site-heading text-center">
             <h3>Our Team</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt <br /> ut labore et dolore magna aliqua.
-              Ut enim ad minim
+            <p className="text-dark">
+              This is the team that started the Lexxy Pastry <br /> We have our Head Chef,Maneger and the Software engineer present.
+            Lexxy Pastry For You
             </p>
             <div className="border"></div>
           </div>

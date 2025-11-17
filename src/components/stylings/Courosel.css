@@ -7,12 +7,16 @@
   background-color: #2e3033;
   padding: 3rem 2rem;
   gap: 2rem;
+
 }
 
 .hero-text {
   flex: 1 1 300px;
   color: white;
   font-family: 'Poppins', sans-serif;
+  font-size: large;
+  
+
 }
 
 .hero-text h1 {
@@ -25,7 +29,7 @@
 }
 
 .rainbow-text {
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: bold;
   background: linear-gradient(
     to right,
@@ -143,6 +147,8 @@
 
   .hero-text {
     flex: 1 1 100%;
+    text-size-adjust: 150px;
+    
   }
 
   .carousel-body {
@@ -182,3 +188,4 @@
     font-size: 1rem;
   }
 }
+
