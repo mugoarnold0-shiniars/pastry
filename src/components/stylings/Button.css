@@ -2,7 +2,7 @@
 /* From Uiverse.io by mrhyddenn */
 
 /* From Uiverse.io by xueyuantan */ 
-button {
+.b{
   width: 9em;
   height: 3em;
   border-radius: 30em;
@@ -14,9 +14,10 @@ button {
   z-index: 1;
   box-shadow: 6px 6px 12px #c5c5c5,
               -6px -6px 12px #ffffff;
+
  }
  
- button::before {
+ .b::before {
   content: '';
   width: 0;
   height: 3em;
@@ -30,6 +31,6 @@ button {
   z-index: -1;
  }
  
- button:hover::before {
+ .b:hover::before {
   width: 9em;
  }

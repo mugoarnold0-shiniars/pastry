@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 const Aboutus = () => {
   return (
@@ -177,6 +178,8 @@ const Aboutus = () => {
       </div>
     </div>
   );
+  <ScrollToTopButton/>
+
 };
 
 export default Aboutus;
