@@ -103,16 +103,26 @@ const Home = () => {
 
   // Filter & Sort
   const filteredProducts = products
-    .filter(
-      (p) =>
-        p.product_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.product_description.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) => {
-      if (sortOrder === "low-high") return a.product_cost - b.product_cost;
-      if (sortOrder === "high-low") return b.product_cost - a.product_cost;
-      return 0;
-    });
+  .filter(
+    (p) =>
+      p.product_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      p.product_description.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+  .sort((a, b) => {
+    switch (sortOrder) {
+      case "low-high":
+        return a.product_cost - b.product_cost;
+      case "high-low":
+        return b.product_cost - a.product_cost;
+      case "name-asc":
+        return a.product_name.localeCompare(b.product_name);
+      case "name-desc":
+        return b.product_name.localeCompare(a.product_name);
+      default:
+        return 0;
+    }
+  });
+
 
   return (
     <>
@@ -126,25 +136,30 @@ const Home = () => {
           <i className="bi bi-search search-icon position-absolute top-50 translate-middle-y ms-3"></i>
           <input
             type="text"
-            className="form-control ps-5"
+            className="form-control ps-5 "
             placeholder="Search for pastry..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
 
-        {/* Sort */}
-        <div className="text-end me-4 mb-3">
-          <button
-            className="btn me-3 btn-success"
-            onClick={() =>
-              setSortOrder((prev) =>
-                prev === "low-high" ? "high-low" : "low-high"
-              )
-            }
-          >
-            Sort Price: {sortOrder === "low-high" ? "Low → High" : "High → Low"}
-          </button>
+            {/* Sort */}
+            <div className="text-end me-4 mb-3">
+            <div className="text-end me-4 mb-3">
+      <label className="me-2 fw-semibold">Sort by:</label>
+      <select
+        className="form-select d-inline-block w-auto b "
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value)}
+      >
+        <option value="none">Default</option>
+        <option value="low-high">Price: Low → High</option>
+        <option value="high-low">Price: High → Low</option>
+        <option value="name-asc">Name: A → Z</option>
+        <option value="name-desc">Name: Z → A</option>
+      </select>
+    </div>
+
         </div>
       </div>
 
@@ -163,7 +178,7 @@ const Home = () => {
               />
 
               {/* Heart button */}
-              <div className="side-buttons position-absolute top-0 end-0 m-4 d-flex flex-column mt-3">
+              <div className="side-buttons position-absolute top-0 end-0 m-4 d-flex flex-column mt-3 m-3">
                 <button
                   className="btn btn-light mb-4 shadow-sm rounded-circle p-2"
                   style={{
@@ -224,7 +239,7 @@ const Home = () => {
       {/* Floating Heart Button */}
       <button
         onClick={() => setShowWishlist(true)}
-        className="btn btn-danger position-fixed"
+        className="btn btn-danger position-fixed mt-5"
         style={{
           bottom: "120px",
           right: "25px",
@@ -247,7 +262,7 @@ const Home = () => {
               top: "0px",
               right: "-5px",
               borderRadius: "50%",
-              padding: "5px 8px",
+              padding: "5px 8px ",
               fontSize: "12px",
             }}
           >
@@ -272,7 +287,7 @@ const Home = () => {
         <i className="bi bi-cart-fill text-white fs-4 position-relative">
           {cartItems.length > 0 && (
             <span
-              className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-white text-primary border border-2 border-primary"
+              className="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-white text-primary border border-2 border-primary p-3"
               style={{ fontSize: "0.6em", padding: "0.4em" }}
             >
               {cartItems.length}

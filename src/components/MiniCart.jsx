@@ -1,10 +1,9 @@
-// MiniCart.jsx
 import React from "react";
 
 const DELIVERY_FEE = 200;
 const IMG_URL = "https://Arnold254.pythonanywhere.com/static/images/";
 
-const MiniCart = ({ onClose, cartItems, setCartItems, navigate }) => {
+const MiniCart = ({ onClose, cartItems, setCartItems, navigate, isLoggedIn }) => {
   
   // Remove item
   const removeItem = (id) => {
@@ -36,9 +35,28 @@ const MiniCart = ({ onClose, cartItems, setCartItems, navigate }) => {
 
   const total = subtotal + DELIVERY_FEE;
 
+  // Handle checkout
+  const handleCheckout = () => {
+    if (!isLoggedIn) {
+      alert("You must be signed in to proceed with payment.");
+      navigate("/signin"); // Redirect to login page
+      return;
+    }
+
+    navigate("/mpesapayment", {
+      state: {
+        cartItems: normalizedItems,
+        subtotal,
+        deliveryFee: DELIVERY_FEE,
+        total,
+      },
+    });
+    onClose();
+  };
+
   return (
     <div
-      className="card shadow-lg p-3 position-fixed bg-white border"
+      className="card shadow-lg p-3 position-fixed bg-white border "
       style={{
         top: "80px",
         right: "20px",
@@ -146,17 +164,7 @@ const MiniCart = ({ onClose, cartItems, setCartItems, navigate }) => {
           {/* Checkout */}
           <button
             className="btn btn-primary w-100 mt-3"
-            onClick={() => {
-              navigate("/mpesapayment", {
-                state: {
-                  cartItems: normalizedItems,
-                  subtotal,
-                  deliveryFee: DELIVERY_FEE,
-                  total,
-                },
-              });
-              onClose();
-            }}
+            onClick={handleCheckout}
           >
             Buy now
           </button>
