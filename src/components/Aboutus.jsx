@@ -82,20 +82,17 @@ const Aboutus = () => {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
                   convallis egestas rhoncus.
                 </p>
-                <div className="social-icons">
-                  <a href="https://www.facebook.com/">
-                    <i className="fa fa-facebook-square fa-3x social"></i>
-                  </a>
-                  <a href="https://twitter.com/">
-                    <i className="fa fa-twitter-square fa-3x social"></i>
-                  </a>
-                  <a href="https://plus.google.com/">
-                    <i className="fa fa-google-plus-square fa-3x social"></i>
-                  </a>
-                  <a href="mailto:bootsnipp@gmail.com">
-                    <i className="fa fa-envelope-square fa-3x social"></i>
-                  </a>
-                </div>
+                <img
+                    src="/images/profile1.jpeg" // Make sure this path is correct
+                    alt="Profile"
+                    style={{
+                      width: "200px",
+                      height: "200px",
+                      borderRadius: "50%", // Makes it circular
+                      objectFit: "cover",
+                       marginLeft:"80px"
+                    }}
+                  />
               </div>
             </div>
           </div>
@@ -110,20 +107,17 @@ const Aboutus = () => {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
                   convallis egestas rhoncus.
                 </p>
-                <div className="social-icons">
-                  <a href="https://www.facebook.com/">
-                    <i className="fa fa-facebook-square fa-3x social"></i>
-                  </a>
-                  <a href="https://twitter.com/">
-                    <i className="fa fa-twitter-square fa-3x social"></i>
-                  </a>
-                  <a href="https://plus.google.com/">
-                    <i className="fa fa-google-plus-square fa-3x social"></i>
-                  </a>
-                  <a href="mailto:bootsnipp@gmail.com">
-                    <i className="fa fa-envelope-square fa-3x social"></i>
-                  </a>
-                </div>
+                <img
+                    src="/images/profile2.webp" // Make sure this path is correct
+                    alt="Profile"
+                    style={{
+                      width: "250px",
+                      height: "250px",
+                      borderRadius: "50%", // Makes it circular
+                      objectFit: "center",
+                       marginLeft:"55px"
+                    }}
+                  />
               </div>
             </div>
           </div>
@@ -138,20 +132,17 @@ const Aboutus = () => {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
                   convallis egestas rhoncus.
                 </p>
-                <div className="social-icons">
-                  <a href="https://www.facebook.com/">
-                    <i className="fa fa-facebook-square fa-3x social"></i>
-                  </a>
-                  <a href="https://twitter.com/">
-                    <i className="fa fa-twitter-square fa-3x social"></i>
-                  </a>
-                  <a href="https://plus.google.com/">
-                    <i className="fa fa-google-plus-square fa-3x social"></i>
-                  </a>
-                  <a href="mailto:bootsnipp@gmail.com">
-                    <i className="fa fa-envelope-square fa-3x social"></i>
-                  </a>
-                </div>
+                <img
+                    src="/images/profile3.jpeg" // Make sure this path is correct
+                    alt="Profile"
+                    style={{
+                      width: "200px",
+                      height: "200px",
+                      borderRadius: "50%", // Makes it circular
+                      objectFit: "cover",
+                       marginLeft:"90px"
+                    }}
+                  />
               </div>
             </div>
           </div>
@@ -177,8 +168,8 @@ const Aboutus = () => {
         </div>
       </div>
     </div>
+    
   );
-  <ScrollToTopButton/>
 
 };
 

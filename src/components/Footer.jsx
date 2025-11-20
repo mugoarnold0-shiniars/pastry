@@ -86,6 +86,9 @@ const Footer = () => {
                 <p>
                 <Link to = "/aboutus">About us</Link>
                 </p>
+                <p>
+                  <Link to = "/findus" >find us</Link>
+                </p>
               </div>
 
               {/* Useful links */}

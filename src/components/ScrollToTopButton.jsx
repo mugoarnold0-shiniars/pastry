@@ -40,7 +40,7 @@ const ScrollToTopButton = () => {
             width: '56px',
             height: '56px',
             bottom: '20px', // Positioned below the heart/cart buttons
-            right: '20px',
+            right: '23px',
             zIndex: 1000 // Ensure it floats above all other content
           }}
           aria-label="Scroll to top"

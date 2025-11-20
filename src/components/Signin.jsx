@@ -27,7 +27,7 @@ const Signin = () => {
       data.append("email",email)
       data.append("password",password)
       // await for a response from the api
-      const response = await axios.post("https://arnold254.pythonanywhere.com/api/signin",data)
+      const response = await axios.post("https://Arnold254.pythonanywhere.com/api/signin",data)
       // set the loading to false so that it stops loading
       setLoading(false)
       

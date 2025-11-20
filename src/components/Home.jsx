@@ -9,6 +9,8 @@ import Chatbot from "./Chatrobot";
 import FavoritesModal from "./FavoritesModal";
 import ScrollToTopButton from "./ScrollToTopButton";
 import MiniCart from "./MiniCart";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,19 +20,30 @@ const Home = () => {
   const [showChat, setShowChat] = useState(false);
   const [sortOrder, setSortOrder] = useState("none");
   const [showWishlist, setShowWishlist] = useState(false);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
   const [cartItems, setCartItems] = useState([]);
   const [showMiniCart, setShowMiniCart] = useState(false);
-  const [favoriteIds, setFavoriteIds] = useState(
-    new Set(
-      (JSON.parse(localStorage.getItem("favorites")) || []).map(
-        (item) => item.product_id
-      )
-    )
-  );
+
+  // Popup state
+  const [showPopup, setShowPopup] = useState(false);
 
   const navigate = useNavigate();
   const IMG_URL = "https://Arnold254.pythonanywhere.com/static/images/";
+
+  // Check login
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isLoggedIn = !!user;
+
+  // Show popup only once per visit
+  useEffect(() => {
+    const popupSeen = localStorage.getItem("popupSeen");
+    if (!popupSeen) {
+      setShowPopup(true);
+      localStorage.setItem("popupSeen", "true"); // Mark as seen
+    }
+  }, []);
 
   // Fetch products
   const fetchProducts = async () => {
@@ -51,36 +64,25 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  // Toggle favorite status
-  const toggleFavorite = (product) => {
-    const favoritesList = JSON.parse(localStorage.getItem("favorites")) || [];
-    const isFav = favoriteIds.has(product.product_id);
-    let updatedFavorites;
-    const updatedFavoriteIds = new Set(favoriteIds);
-
-    if (isFav) {
-      updatedFavorites = favoritesList.filter(
-        (item) => item.product_id !== product.product_id
-      );
-      updatedFavoriteIds.delete(product.product_id);
-    } else {
-      updatedFavorites = [...favoritesList, product];
-      updatedFavoriteIds.add(product.product_id);
-    }
-
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-    setFavoriteIds(updatedFavoriteIds);
-  };
-
-  // Wishlist functions
+  // Add to Wishlist with toast
   const addToWishlist = (product) => {
     const exists = favorites.some((f) => f.product_id === product.product_id);
-    if (!exists) setFavorites([...favorites, product]);
-    setShowWishlist(true);
+
+    if (!exists) {
+      const updated = [...favorites, product];
+      setFavorites(updated);
+      localStorage.setItem("favorites", JSON.stringify(updated));
+
+      toast.success("Added to wishlist ❤️");
+    } else {
+      toast.info("Already in wishlist");
+    }
   };
 
   const removeFavorite = (id) => {
-    setFavorites(favorites.filter((item) => item.product_id !== id));
+    const updated = favorites.filter((item) => item.product_id !== id);
+    setFavorites(updated);
+    localStorage.setItem("favorites", JSON.stringify(updated));
   };
 
   // Add to cart
@@ -88,7 +90,6 @@ const Home = () => {
     setCartItems((prev) => {
       const exists = prev.find((item) => item.product_id === product.product_id);
       if (exists) {
-        // Increment quantity if already in cart
         return prev.map((item) =>
           item.product_id === product.product_id
             ? { ...item, quantity: (item.quantity || 1) + 1 }
@@ -98,34 +99,62 @@ const Home = () => {
         return [...prev, { ...product, quantity: 1 }];
       }
     });
+
+    toast.success("Added to cart 🛒");
     setShowMiniCart(true);
   };
 
-  // Filter & Sort
+  // Filter & Sort Products
   const filteredProducts = products
-  .filter(
-    (p) =>
-      p.product_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      p.product_description.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-  .sort((a, b) => {
-    switch (sortOrder) {
-      case "low-high":
-        return a.product_cost - b.product_cost;
-      case "high-low":
-        return b.product_cost - a.product_cost;
-      case "name-asc":
-        return a.product_name.localeCompare(b.product_name);
-      case "name-desc":
-        return b.product_name.localeCompare(a.product_name);
-      default:
-        return 0;
-    }
-  });
-
+    .filter(
+      (p) =>
+        p.product_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.product_description.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      switch (sortOrder) {
+        case "low-high":
+          return a.product_cost - b.product_cost;
+        case "high-low":
+          return b.product_cost - a.product_cost;
+        case "name-asc":
+          return a.product_name.localeCompare(b.product_name);
+        case "name-desc":
+          return b.product_name.localeCompare(a.product_name);
+        default:
+          return 0;
+      }
+    });
 
   return (
     <>
+      <ToastContainer position="bottom-center" autoClose={2000} />
+
+      {/* Popup */}
+      {showPopup && (
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+          style={{
+            backgroundColor: "rgba(0,0,0,0.5)",
+            zIndex: 5000,
+          }}
+        >
+          <div
+            className="bg-white p-4 rounded shadow text-center"
+            style={{ maxWidth: "400px" }}
+          >
+            <h5 className="mb-3">Welcome to our Pastry Store!</h5>
+            <p>Check out our delicious pastries and cakes 🥐🍰</p>
+            <button
+              className="btn btn-primary mt-3"
+              onClick={() => setShowPopup(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <Courosel />
 
       <div className="m-3">
@@ -136,30 +165,27 @@ const Home = () => {
           <i className="bi bi-search search-icon position-absolute top-50 translate-middle-y ms-3"></i>
           <input
             type="text"
-            className="form-control ps-5 "
+            className="form-control ps-5"
             placeholder="Search for pastry..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
 
-            {/* Sort */}
-            <div className="text-end me-4 mb-3">
-            <div className="text-end me-4 mb-3">
-      <label className="me-2 fw-semibold">Sort by:</label>
-      <select
-        className="form-select d-inline-block w-auto b "
-        value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value)}
-      >
-        <option value="none">Default</option>
-        <option value="low-high">Price: Low → High</option>
-        <option value="high-low">Price: High → Low</option>
-        <option value="name-asc">Name: A → Z</option>
-        <option value="name-desc">Name: Z → A</option>
-      </select>
-    </div>
-
+        {/* Sort */}
+        <div className="text-end me-4 mb-3">
+          <label className="me-2 fw-semibold">Sort by:</label>
+          <select
+            className="form-select d-inline-block w-auto"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
+            <option value="none">Default</option>
+            <option value="low-high">Price: Low → High</option>
+            <option value="high-low">Price: High → Low</option>
+            <option value="name-asc">Name: A → Z</option>
+            <option value="name-desc">Name: Z → A</option>
+          </select>
         </div>
       </div>
 
@@ -196,21 +222,9 @@ const Home = () => {
 
               <div className="card-body">
                 <h5 className="fw-bold">{product.product_name}</h5>
-                <p className="text-dark">{product.product_description.slice(0, 60)}...</p>
-
-                {/* Rating */}
-                <div className="mb-2">
-                  {[...Array(5)].map((_, i) => (
-                    <i
-                      key={i}
-                      className={`bi bi-star-fill ${
-                        i < (product.rating || Math.floor(Math.random() * 5) + 1)
-                          ? "text-warning"
-                          : "text-secondary"
-                      }`}
-                    />
-                  ))}
-                </div>
+                <p className="text-dark">
+                  {product.product_description.slice(0, 60)}...
+                </p>
 
                 <b className="text-danger">Ksh {product.product_cost}</b>
                 <br />
@@ -262,7 +276,7 @@ const Home = () => {
               top: "0px",
               right: "-5px",
               borderRadius: "50%",
-              padding: "5px 8px ",
+              padding: "5px 8px",
               fontSize: "12px",
             }}
           >
@@ -273,7 +287,7 @@ const Home = () => {
 
       {/* Floating Cart Button */}
       <button
-        className="btn btn-lg rounded-circle shadow position-fixed border-0 p-0"
+        className="btn btn-lg rounded-circle shadow position-fixed border-0 p-0 mb-4"
         style={{
           backgroundColor: "#0d6efd",
           width: "56px",
@@ -303,6 +317,7 @@ const Home = () => {
           cartItems={cartItems}
           setCartItems={setCartItems}
           navigate={navigate}
+          isLoggedIn={isLoggedIn}
         />
       )}
 
