@@ -3,10 +3,16 @@ import { useNavigate } from "react-router-dom";
 
 const img_url = "https://Arnold254.pythonanywhere.com/static/images/";
 
-const FavoritesModal = ({ favorites, onClose, removeFavorite }) => {
+const FavoritesModal = ({ favorites, onClose, removeFavorite, isLoggedIn }) => {
   const navigate = useNavigate();
 
   const handleCheckout = () => {
+    if (!isLoggedIn) {
+      alert("You must be logged in to checkout.");
+      navigate("/signin"); // Redirect to login page
+      return;
+    }
+
     // Calculate subtotal
     const subtotal = favorites.reduce(
       (sum, item) => sum + Number(item.product_cost),

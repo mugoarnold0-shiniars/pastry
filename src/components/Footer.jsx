@@ -58,8 +58,8 @@ const Footer = () => {
                     height: "2px",
                   }}
                 />
-                <p>
-                Welcome to Soko <span className="text-danger">Garden</span> API.Hope u will be open about it,we are so exited 
+                <p className="text-white">
+                Welcome to Lexxy <span className="text-danger">Pastry</span> API.Hope u will be open about it,we are so exited 
                 </p>
               </div>
 
@@ -135,14 +135,14 @@ const Footer = () => {
                     height: "2px",
                   }}
                 />
-                <p>
+                <p className="text-white">
                   <i className="fas fa-home me-3"></i> 
                   Nairobi, NA 10012, KE
                 </p>
-                <p>
-                  <i className="fas fa-phone me-3"></i> + 254 759 8195 60
+                <p className="text-white">
+                  <i className="fas fa-phone me-3 "></i> + 254 759 8195 60
                 </p>
-                <p>
+                <p className="text-white">
                   <i className="fas fa-print me-3"></i> + 254 759 8195 60
                 </p>
               </div>
