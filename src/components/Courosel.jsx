@@ -6,10 +6,25 @@ const Courosel = () => {
     <section className="hero-section">
       {/* Left Text Section */}
       <div className="hero-text ">
-        <h1>Our</h1>
-        <h1>Bakery</h1>
-        <h1>start</h1>
-        <h1>OFF%5</h1>
+        <h1  style={{
+          fontSize: "80px",
+        }}>Our</h1>
+        <h1  
+         style={{
+          fontSize: "80px",
+        }}
+        
+        >Bakery</h1>
+        <h1
+         style={{
+          fontSize: "80px",
+        }}
+        >start</h1>
+        <h1
+         style={{
+          fontSize: "80px",
+        }}
+        >OFF%5</h1>
         <p>We would like You to enjoy our fine made delicacies</p>
         <h1 className="rainbow-text">Lexxy pastry</h1>
       </div>
