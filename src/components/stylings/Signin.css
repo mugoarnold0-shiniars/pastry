@@ -1,0 +1,101 @@
+/* Full-page container with background image */
+.signin-container{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-image: url("https://img.freepik.com/premium-photo/empty-black-chalkboard-sign-hanging-rope-wood-background_136930-1216.jpg?semt=ais_hybrid&w=740&q=80");
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
+
+/* Dark overlay for readability */
+.signin-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+/* Card styling */
+.signin-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Title */
+.signin-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form inputs */
+.signin-form input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* Actions container */
+.signin-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Remember me checkbox */
+.remember-me {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input {
+    margin-right: 5px;
+}
+
+/* Login button */
+.btn-login {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #357ABD;
+}
+
+/* Messages */
+.signin-message, .text-success, .text-danger {
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.text-success {
+    color: green;
+}
+
+.text-danger {
+    color: red;
+}
