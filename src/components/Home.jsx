@@ -159,6 +159,16 @@ const Home = () => {
 
       <div className="m-3">
         <h3 className="text-info text-center">Available Products</h3>
+        <hr
+  style={{
+    width: "40%",
+    margin: "20px auto",
+    height: "4px",
+    backgroundColor: "rgba(0,0,0,0.35)",     // slightly darker so it shows
+    border: "none",
+    boxShadow: "0px 6px 10px rgba(0,0,0,0.35)"   // stronger shadow
+  }}
+/>
 
         {/* Search */}
         <div className="search-bar mb-4 position-relative">
