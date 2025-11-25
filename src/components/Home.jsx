@@ -257,6 +257,7 @@ const Home = () => {
           favorites={favorites}
           onClose={() => setShowWishlist(false)}
           removeFavorite={removeFavorite}
+          isLoggedIn={isLoggedIn}  
         />
       )}
 

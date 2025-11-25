@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const img_url = "https://Arnold254.pythonanywhere.com/static/images/";
@@ -6,10 +6,19 @@ const img_url = "https://Arnold254.pythonanywhere.com/static/images/";
 const FavoritesModal = ({ favorites, onClose, removeFavorite, isLoggedIn }) => {
   const navigate = useNavigate();
 
+  // Backup login check — in case parent didn’t pass isLoggedIn properly
+  const [loggedIn, setLoggedIn] = useState(isLoggedIn);
+
+  useEffect(() => {
+    // Always re-check localStorage when component opens
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    setLoggedIn(!!storedUser);
+  }, []);
+
   const handleCheckout = () => {
-    if (!isLoggedIn) {
+    if (!loggedIn) {
       alert("You must be logged in to checkout.");
-      navigate("/signin"); // Redirect to login page
+      navigate("/signin");
       return;
     }
 
@@ -18,10 +27,11 @@ const FavoritesModal = ({ favorites, onClose, removeFavorite, isLoggedIn }) => {
       (sum, item) => sum + Number(item.product_cost),
       0
     );
-    const deliveryFee = 200; // Set your delivery fee
+
+    const deliveryFee = 200;
     const total = subtotal + deliveryFee;
 
-    // Navigate to M-Pesa payment page with state
+    // Navigate to M-Pesa payment page
     navigate("/mpesapayment", {
       state: { cartItems: favorites, subtotal, deliveryFee, total },
     });
@@ -62,7 +72,6 @@ const FavoritesModal = ({ favorites, onClose, removeFavorite, isLoggedIn }) => {
                   className="p-2 rounded shadow-sm"
                   style={{ background: "#f8f9fa" }}
                 >
-                  {/* Image */}
                   <img
                     src={img_url + item.product_photo}
                     alt={item.product_name}
@@ -74,7 +83,6 @@ const FavoritesModal = ({ favorites, onClose, removeFavorite, isLoggedIn }) => {
                     }}
                   />
 
-                  {/* Info */}
                   <p className="fw-bold mt-2 mb-1 text-center">
                     {item.product_name}
                   </p>
